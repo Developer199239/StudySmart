@@ -33,10 +33,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.wordpress.murtuzarahman.studysmart.R
+import com.wordpress.murtuzarahman.studysmart.domain.model.Session
 import com.wordpress.murtuzarahman.studysmart.domain.model.Subject
 import com.wordpress.murtuzarahman.studysmart.domain.model.Task
 import com.wordpress.murtuzarahman.studysmart.presentation.components.CountCard
 import com.wordpress.murtuzarahman.studysmart.presentation.components.SubjectCard
+import com.wordpress.murtuzarahman.studysmart.presentation.components.studySessionsList
 import com.wordpress.murtuzarahman.studysmart.presentation.components.tasksList
 
 @Composable
@@ -136,6 +138,37 @@ fun DashBoardScreen() {
             taskId = 1
         ),
     )
+
+    var sessions = listOf(
+        Session(
+            sessionSubjectId = 0,
+            relatedToSubject = "Session1",
+            date = 0L,
+            duration = 2,
+            sessionId = 0
+        ),
+        Session(
+            sessionSubjectId = 0,
+            relatedToSubject = "Session2",
+            date = 0L,
+            duration = 2,
+            sessionId = 0
+        ),
+        Session(
+            sessionSubjectId = 0,
+            relatedToSubject = "Session3",
+            date = 0L,
+            duration = 2,
+            sessionId = 0
+        ),
+        Session(
+            sessionSubjectId = 0,
+            relatedToSubject = "Session4",
+            date = 0L,
+            duration = 2,
+            sessionId = 0
+        )
+    )
     Scaffold(
         topBar = {
             DashboardScreenTopBar()
@@ -180,6 +213,16 @@ fun DashBoardScreen() {
                 tasks = tasks,
                 onTaskCardClick = {},
                 onCheckBoxClick = {},
+            )
+            item {
+                Spacer(modifier = Modifier.height(20.dp))
+            }
+            studySessionsList(
+                sectionTitle = "RECENT STUDY SESSIONS",
+                emptyListText = "You don't have any recent study sessions.\n " +
+                        "Start a study session to begin recording your progress.",
+                sessions = sessions,
+                onDeleteIconClick = {}
             )
         }
 
