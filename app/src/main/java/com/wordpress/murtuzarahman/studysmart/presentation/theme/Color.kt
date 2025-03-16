@@ -1,4 +1,4 @@
-package com.wordpress.murtuzarahman.studysmart.ui.theme
+package com.wordpress.murtuzarahman.studysmart.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
