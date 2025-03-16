@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -16,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -32,8 +34,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.wordpress.murtuzarahman.studysmart.R
 import com.wordpress.murtuzarahman.studysmart.domain.model.Subject
+import com.wordpress.murtuzarahman.studysmart.domain.model.Task
 import com.wordpress.murtuzarahman.studysmart.presentation.components.CountCard
 import com.wordpress.murtuzarahman.studysmart.presentation.components.SubjectCard
+import com.wordpress.murtuzarahman.studysmart.presentation.components.tasksList
 
 @Composable
 fun DashBoardScreen() {
@@ -41,28 +45,96 @@ fun DashBoardScreen() {
         Subject(
             name = "English",
             goalHours = 15f,
-            colors = Subject.subjectCardColors[0]
+            colors = Subject.subjectCardColors[0],
+            subjectId = 0
         ),
         Subject(
             name = "Bangla",
             goalHours = 10f,
-            colors = Subject.subjectCardColors[3]
+            colors = Subject.subjectCardColors[3],
+            subjectId = 0
         ),
         Subject(
             name = "Math",
             goalHours = 12f,
-            colors = Subject.subjectCardColors[2]
+            colors = Subject.subjectCardColors[2],
+            subjectId = 0
         ),
         Subject(
             name = "Data Structure",
             goalHours = 20f,
-            colors = Subject.subjectCardColors[4]
+            colors = Subject.subjectCardColors[4],
+            subjectId = 0
         ),
         Subject(
             name = "Algorithm",
             goalHours = 15f,
-            colors = Subject.subjectCardColors[1]
+            colors = Subject.subjectCardColors[1],
+            subjectId = 0
         )
+    )
+
+    val tasks = listOf(
+        Task(
+            title = "Prepare notes",
+            description = "",
+            dueDate = 0L,
+            priority = 0,
+            relatedToSubject = "",
+            isComplete = false,
+            taskSubjectId = 0,
+            taskId = 1
+        ),
+        Task(
+            title = "Do Homework",
+            description = "",
+            dueDate = 0L,
+            priority = 1,
+            relatedToSubject = "",
+            isComplete = true,
+            taskSubjectId = 0,
+            taskId = 1
+        ),
+        Task(
+            title = "Go Coaching",
+            description = "",
+            dueDate = 0L,
+            priority = 2,
+            relatedToSubject = "",
+            isComplete = false,
+            taskSubjectId = 0,
+            taskId = 1
+        ),
+        Task(
+            title = "Prepare notes",
+            description = "",
+            dueDate = 0L,
+            priority = 2,
+            relatedToSubject = "",
+            isComplete = false,
+            taskSubjectId = 0,
+            taskId = 1
+        ),
+        Task(
+            title = "Exam test",
+            description = "",
+            dueDate = 0L,
+            priority = 1,
+            relatedToSubject = "",
+            isComplete = false,
+            taskSubjectId = 0,
+            taskId = 1
+        ),
+        Task(
+            title = "Sample 1",
+            description = "",
+            dueDate = 0L,
+            priority = 0,
+            relatedToSubject = "",
+            isComplete = false,
+            taskSubjectId = 0,
+            taskId = 1
+        ),
     )
     Scaffold(
         topBar = {
@@ -90,6 +162,25 @@ fun DashBoardScreen() {
                     subjectList = subjects,
                 )
             }
+            item {
+                Button(
+                    onClick = {},
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 48.dp, vertical = 20.dp)
+
+                ) {
+                    Text(text = "Start Study Session")
+                }
+            }
+            tasksList(
+                sectionTitle = "UPCOMING TASKS",
+                emptyListText = "You don't have any upcoming tasks.\n " +
+                        "Click the + button in subject screen to add new task.",
+                tasks = tasks,
+                onTaskCardClick = {},
+                onCheckBoxClick = {},
+            )
         }
 
     }
@@ -165,7 +256,9 @@ fun SubjectCardSection(
 
         if(subjectList.isEmpty()) {
            Image(
-           modifier = Modifier.size(120.dp).align(Alignment.CenterHorizontally),
+           modifier = Modifier
+               .size(120.dp)
+               .align(Alignment.CenterHorizontally),
                painter = painterResource(R.drawable.img_books),
                contentDescription = ""
            )
