@@ -16,6 +16,7 @@ import com.wordpress.murtuzarahman.studysmart.domain.model.Subject
 import com.wordpress.murtuzarahman.studysmart.domain.model.Task
 import com.wordpress.murtuzarahman.studysmart.presentation.dashboard.DashBoardScreen
 import com.wordpress.murtuzarahman.studysmart.presentation.subject.SubjectScreen
+import com.wordpress.murtuzarahman.studysmart.presentation.task.TaskScreen
 import com.wordpress.murtuzarahman.studysmart.presentation.theme.StudysmartTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,7 +26,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             StudysmartTheme {
 //                DashBoardScreen()
-                SubjectScreen()
+//                SubjectScreen()
+                TaskScreen()
             }
         }
     }

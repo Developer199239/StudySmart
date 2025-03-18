@@ -1,5 +1,7 @@
 package com.wordpress.murtuzarahman.studysmart.util
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.Color
 import com.wordpress.murtuzarahman.studysmart.presentation.theme.Green
 import com.wordpress.murtuzarahman.studysmart.presentation.theme.Orange
@@ -19,12 +21,13 @@ enum class Priority(val title: String, val color: Color, val value: Int) {
     }
 }
 
-//fun Long?.changeMillisToDateString(): String {
-//    val date: LocalDate = this?.let {
-//        Instant
-//            .ofEpochMilli(it)
-//            .atZone(ZoneId.systemDefault())
-//            .toLocalDate()
-//    } ?: LocalDate.now()
-//    return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
-//}
+@RequiresApi(Build.VERSION_CODES.O)
+fun Long?.changeMillisToDateString(): String {
+    val date: LocalDate = this?.let {
+        Instant
+            .ofEpochMilli(it)
+            .atZone(ZoneId.systemDefault())
+            .toLocalDate()
+    } ?: LocalDate.now()
+    return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+}
