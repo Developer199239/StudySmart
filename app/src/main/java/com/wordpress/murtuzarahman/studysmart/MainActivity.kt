@@ -15,6 +15,7 @@ import com.wordpress.murtuzarahman.studysmart.domain.model.Session
 import com.wordpress.murtuzarahman.studysmart.domain.model.Subject
 import com.wordpress.murtuzarahman.studysmart.domain.model.Task
 import com.wordpress.murtuzarahman.studysmart.presentation.dashboard.DashBoardScreen
+import com.wordpress.murtuzarahman.studysmart.presentation.session.SessionScreen
 import com.wordpress.murtuzarahman.studysmart.presentation.subject.SubjectScreen
 import com.wordpress.murtuzarahman.studysmart.presentation.task.TaskScreen
 import com.wordpress.murtuzarahman.studysmart.presentation.theme.StudysmartTheme
@@ -27,8 +28,8 @@ class MainActivity : ComponentActivity() {
             StudysmartTheme {
 //                DashBoardScreen()
 //                SubjectScreen()
-                TaskScreen()
-            }
+//                TaskScreen()
+                SessionScreen()            }
         }
     }
 }
