@@ -26,6 +26,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +41,7 @@ import com.wordpress.murtuzarahman.studysmart.R
 import com.wordpress.murtuzarahman.studysmart.domain.model.Session
 import com.wordpress.murtuzarahman.studysmart.domain.model.Subject
 import com.wordpress.murtuzarahman.studysmart.domain.model.Task
+import com.wordpress.murtuzarahman.studysmart.presentation.components.AddSubjectDialog
 import com.wordpress.murtuzarahman.studysmart.presentation.components.CountCard
 import com.wordpress.murtuzarahman.studysmart.presentation.components.SubjectCard
 import com.wordpress.murtuzarahman.studysmart.presentation.components.studySessionsList
@@ -139,7 +145,7 @@ fun DashBoardScreen() {
         ),
     )
 
-    var sessions = listOf(
+    val sessions = listOf(
         Session(
             sessionSubjectId = 0,
             relatedToSubject = "Session1",
@@ -169,6 +175,31 @@ fun DashBoardScreen() {
             sessionId = 0
         )
     )
+
+    var isAddSubjectDialogOpen by rememberSaveable { mutableStateOf(false) }
+    var subjectName by remember { mutableStateOf("") }
+    var goalHours by remember { mutableStateOf("") }
+    var selectedColor by remember { mutableStateOf(Subject.subjectCardColors.random()) }
+
+
+    AddSubjectDialog(
+        isOpen = isAddSubjectDialogOpen,
+        title = "Title",
+        selectedColors = selectedColor,
+        subjectName = subjectName,
+        goalHours = goalHours,
+        onColorChange = {selectedColor = it},
+        onSubjectNameChange = {subjectName = it},
+        onGoalHoursChange = {goalHours = it},
+        onDismissRequest = {
+           isAddSubjectDialogOpen = false
+        },
+        onConfirmButtonClick = {
+           isAddSubjectDialogOpen = false
+        }
+    )
+
+
     Scaffold(
         topBar = {
             DashboardScreenTopBar()
@@ -193,6 +224,9 @@ fun DashBoardScreen() {
                 SubjectCardSection(
                     modifier = Modifier.fillMaxWidth(),
                     subjectList = subjects,
+                    onAddIconClicked = {
+                        isAddSubjectDialogOpen = true
+                    },
                 )
             }
             item {
@@ -275,7 +309,8 @@ fun SubjectCardSection(
     modifier: Modifier = Modifier,
     subjectList: List<Subject>,
     emptyListText: String = "You don't have any upcoming tasks.\n " +
-            "Click the + button in subject screen to add new task."
+            "Click the + button in subject screen to add new task.",
+    onAddIconClicked: () -> Unit
 ) {
     Column {
         Row(
@@ -288,7 +323,7 @@ fun SubjectCardSection(
                style = MaterialTheme.typography.bodySmall,
                modifier = Modifier.padding(start = 12.dp)
            )
-            IconButton(onClick = {}) {
+            IconButton(onClick = onAddIconClicked) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Add Subject"
