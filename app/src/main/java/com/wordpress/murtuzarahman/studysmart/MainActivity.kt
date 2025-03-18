@@ -4,20 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.ramcosta.composedestinations.DestinationsNavHost
 import com.wordpress.murtuzarahman.studysmart.domain.model.Session
 import com.wordpress.murtuzarahman.studysmart.domain.model.Subject
 import com.wordpress.murtuzarahman.studysmart.domain.model.Task
-import com.wordpress.murtuzarahman.studysmart.presentation.dashboard.DashBoardScreen
-import com.wordpress.murtuzarahman.studysmart.presentation.session.SessionScreen
-import com.wordpress.murtuzarahman.studysmart.presentation.subject.SubjectScreen
-import com.wordpress.murtuzarahman.studysmart.presentation.task.TaskScreen
+import com.wordpress.murtuzarahman.studysmart.presentation.NavGraphs
 import com.wordpress.murtuzarahman.studysmart.presentation.theme.StudysmartTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,10 +17,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             StudysmartTheme {
-//                DashBoardScreen()
-//                SubjectScreen()
-//                TaskScreen()
-                SessionScreen()            }
+                DestinationsNavHost(navGraph = NavGraphs.root)
+            }
         }
     }
 }

@@ -35,6 +35,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.wordpress.murtuzarahman.studysmart.presentation.components.DeleteDialog
 import com.wordpress.murtuzarahman.studysmart.presentation.components.SubjectListBottomSheet
 import com.wordpress.murtuzarahman.studysmart.presentation.components.studySessionsList
@@ -42,9 +44,19 @@ import com.wordpress.murtuzarahman.studysmart.sessions
 import com.wordpress.murtuzarahman.studysmart.subjects
 import kotlinx.coroutines.launch
 
+@Destination
+@Composable
+fun SessionScreenRoute(navigator: DestinationsNavigator) {
+    SessionScreen(
+        onBackButtonClick = {navigator.navigateUp()}
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SessionScreen() {
+private fun SessionScreen(
+    onBackButtonClick: () -> Unit,
+) {
 
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState()
@@ -78,7 +90,7 @@ fun SessionScreen() {
 
     Scaffold(
         topBar = {
-            SessionScreenTopBar(onBackButtonClick = {})
+            SessionScreenTopBar(onBackButtonClick = onBackButtonClick)
         }
     ) { paddingValues ->
         LazyColumn(
