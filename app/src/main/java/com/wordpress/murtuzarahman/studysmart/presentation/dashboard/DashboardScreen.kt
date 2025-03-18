@@ -43,6 +43,7 @@ import com.wordpress.murtuzarahman.studysmart.domain.model.Subject
 import com.wordpress.murtuzarahman.studysmart.domain.model.Task
 import com.wordpress.murtuzarahman.studysmart.presentation.components.AddSubjectDialog
 import com.wordpress.murtuzarahman.studysmart.presentation.components.CountCard
+import com.wordpress.murtuzarahman.studysmart.presentation.components.DeleteDialog
 import com.wordpress.murtuzarahman.studysmart.presentation.components.SubjectCard
 import com.wordpress.murtuzarahman.studysmart.presentation.components.studySessionsList
 import com.wordpress.murtuzarahman.studysmart.presentation.components.tasksList
@@ -177,6 +178,8 @@ fun DashBoardScreen() {
     )
 
     var isAddSubjectDialogOpen by rememberSaveable { mutableStateOf(false) }
+    var isDeleteSessionDialogOpen by rememberSaveable { mutableStateOf(false) }
+
     var subjectName by remember { mutableStateOf("") }
     var goalHours by remember { mutableStateOf("") }
     var selectedColor by remember { mutableStateOf(Subject.subjectCardColors.random()) }
@@ -197,6 +200,15 @@ fun DashBoardScreen() {
         onConfirmButtonClick = {
            isAddSubjectDialogOpen = false
         }
+    )
+
+    DeleteDialog(
+        isOpen = isDeleteSessionDialogOpen,
+        title = "Delete Session?",
+        bodyText = "Are you sure, you want to delete this session? Your studied hours will be reduced " +
+                "by this session time. This action can not be undone.",
+        onDismissRequest = { isDeleteSessionDialogOpen = false },
+        onConfirmButtonClick = { isDeleteSessionDialogOpen = false }
     )
 
 
@@ -256,7 +268,7 @@ fun DashBoardScreen() {
                 emptyListText = "You don't have any recent study sessions.\n " +
                         "Start a study session to begin recording your progress.",
                 sessions = sessions,
-                onDeleteIconClick = {}
+                onDeleteIconClick = {isDeleteSessionDialogOpen = true}
             )
         }
 
