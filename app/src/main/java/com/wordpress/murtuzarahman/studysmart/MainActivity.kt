@@ -10,7 +10,9 @@ import com.wordpress.murtuzarahman.studysmart.domain.model.Subject
 import com.wordpress.murtuzarahman.studysmart.domain.model.Task
 import com.wordpress.murtuzarahman.studysmart.presentation.NavGraphs
 import com.wordpress.murtuzarahman.studysmart.presentation.theme.StudysmartTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
